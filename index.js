@@ -1,5 +1,5 @@
 const THREE = require('three');
-const SEPARATION = 50, AMOUNTX = 100, AMOUNTY = 100;
+const SEPARATION = 32, AMOUNTX = 64, AMOUNTY = 64;
 
 
 var camera, scene, renderer;
@@ -14,10 +14,11 @@ animate();
 function init () {
   /**
    * fov, aspect-ratio, near, far
+   * Set default camera Z-index to pull back for a fuller view of the grid.
    */
   camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera.position.z = 1500;
-  camera.position.x = 100;
+  camera.position.z = AMOUNTY * 16;
+
   scene = new THREE.Scene();
 
   var numParticles = AMOUNTX * AMOUNTY;
@@ -40,10 +41,9 @@ function init () {
   geometry.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
   geometry.setAttribute( 'scale', new THREE.BufferAttribute( scales, 1 ) );
 
-
   var material = new THREE.ShaderMaterial( {
     uniforms: {
-      color: { value: new THREE.Color( 0xffffff ) },
+      color: { value: new THREE.Color( 0x5c2d91 ) },
     },
     vertexShader: document.getElementById( 'vertexshader' ).textContent,
     fragmentShader: document.getElementById( 'fragmentshader' ).textContent
@@ -74,8 +74,6 @@ function animate() {
 function render() {
   camera.position.x += ( mouseX - camera.position.x ) * .05;
   camera.position.y += ( - mouseY - camera.position.y ) * .05;
-  // camera.position.x = 0.5;
-  // camera.position.y = 0.5;
   camera.lookAt( scene.position );
 
   var positions = particles.geometry.attributes.position.array;
@@ -83,10 +81,10 @@ function render() {
   var i = 0, j = 0;
   for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
     for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-      positions[ i + 1 ] = ( Math.cos( ( ix + count ) * 0.3 ) * 50 ) +
-              ( Math.sin( ( iy + count ) * 0.3 ) * 50 );
-      scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 8 +
-              ( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 8;
+      positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.1 ) * 256 ) +
+              ( Math.sin( ( iy + count ) * 0.1 ) * 128 );
+      scales[ j ] = ( Math.sin( ( ix + count ) * 0.25 ) + 1 ) * 8 +
+              ( Math.sin( ( iy + count ) * 0.3 ) + 1 ) * 8;
       i += 3;
       j ++;
     }
@@ -95,6 +93,6 @@ function render() {
   particles.geometry.attributes.scale.needsUpdate = true;
   
   renderer.render( scene, camera );
-  count += 0.1;
+  count += 0.05;
 
 }
