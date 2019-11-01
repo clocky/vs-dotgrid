@@ -1,5 +1,5 @@
 const THREE = require('three');
-const SEPARATION = 32, AMOUNTX = 64, AMOUNTY = 64;
+const SEPARATION = 32, AMOUNTX = 64, AMOUNTY = 128;
 
 
 var camera, scene, renderer;
@@ -28,9 +28,9 @@ function init () {
 
   for ( var ix = 0; ix < AMOUNTX; ix++ ) {
     for ( var iy = 0; iy < AMOUNTY; iy++ ) {
-      positions[ i ] = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 ); // x
-      positions[ i + 1 ] = 0; // y
-      positions[ i + 2 ] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
+      positions[i] = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 ); // x
+      positions[i + 1] = 0; // y
+      positions[i + 2] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
       scales[ j ] = 1;
       i += 3;
       j ++;
@@ -57,7 +57,7 @@ function init () {
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
 
-  document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  //document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 }
 
@@ -76,15 +76,20 @@ function render() {
   camera.position.y += ( - mouseY - camera.position.y ) * .05;
   camera.lookAt( scene.position );
 
+  camera.rotation.z = ( (Math.cos(count) * 0.05) + 1) * 0.5;
+
   var positions = particles.geometry.attributes.position.array;
   var scales = particles.geometry.attributes.scale.array;
+
   var i = 0, j = 0;
   for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
     for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-      positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.1 ) * 256 ) +
-              ( Math.sin( ( iy + count ) * 0.1 ) * 128 );
-      scales[ j ] = ( Math.sin( ( ix + count ) * 0.25 ) + 1 ) * 8 +
-              ( Math.sin( ( iy + count ) * 0.3 ) + 1 ) * 8;
+      positions[ i + 1 ] = 
+        ( Math.sin( ( ix + count ) * 0.1 ) * 512 ) +
+        ( Math.cos( ( iy + count ) * 0.1 ) * 128 );
+      scales[ j ] = 
+        ( Math.sin( ( ix + count ) * 0.25 ) + 1 ) * 8 +
+        ( Math.cos( ( iy + count ) * 0.25 ) + 1 ) * 8;
       i += 3;
       j ++;
     }
