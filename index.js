@@ -12,7 +12,7 @@ function init () {
    * fov, aspect-ratio, near, far
    * Set default camera Z-index to pull back for a fuller view of the grid.
    */
-  camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.z = AMOUNTY * 16;
 
   scene = new THREE.Scene();
@@ -27,7 +27,7 @@ function init () {
       positions[i] = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 ); // x
       positions[i + 1] = 0; // y
       positions[i + 2] = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 ); // z
-      scales[ j ] = 1;
+      scales[j] = 1;
       i += 3;
       j ++;
     } 
@@ -62,11 +62,11 @@ function animate() {
 }
 
 function render() {
-  camera.position.x += ( camera.position.x ) * .05;
-  camera.position.y += ( camera.position.y ) * .05;
+  camera.position.x += (camera.position.x) * .05;
+  camera.position.y += (camera.position.y) * .05;
   camera.lookAt( scene.position );
 
-  camera.rotation.z = ( (count * 0.01) + 0) * 2;
+  camera.rotation.z = (count * 0.02);
 
   var positions = particles.geometry.attributes.position.array;
   var scales = particles.geometry.attributes.scale.array;
