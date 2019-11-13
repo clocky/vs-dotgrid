@@ -1,12 +1,8 @@
 const THREE = require('three');
 const SEPARATION = 32, AMOUNTX = 64, AMOUNTY = 128;
 
-
 var camera, scene, renderer;
 var particles, count = 0;
-var mouseX = 0, mouseY = 0;
-var windowHalfX = window.innerWidth / 2;
-var windowHalfY = window.innerHeight / 2;
 
 init();
 animate();
@@ -57,14 +53,8 @@ function init () {
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
 
-  //document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-
 }
 
-function onDocumentMouseMove( event ) {
-  mouseX = event.clientX - windowHalfX;
-  mouseY = event.clientY - windowHalfY;
-}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -72,8 +62,8 @@ function animate() {
 }
 
 function render() {
-  camera.position.x += ( mouseX - camera.position.x ) * .05;
-  camera.position.y += ( - mouseY - camera.position.y ) * .05;
+  camera.position.x += ( camera.position.x ) * .05;
+  camera.position.y += ( camera.position.y ) * .05;
   camera.lookAt( scene.position );
 
   camera.rotation.z = ( (count * 0.01) + 0) * 2;
