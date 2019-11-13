@@ -76,7 +76,7 @@ function render() {
   camera.position.y += ( - mouseY - camera.position.y ) * .05;
   camera.lookAt( scene.position );
 
-  camera.rotation.z = ( (Math.cos(count) * 0.05) + 1) * 0.5;
+  camera.rotation.z = ( (count * 0.01) + 0) * 2;
 
   var positions = particles.geometry.attributes.position.array;
   var scales = particles.geometry.attributes.scale.array;
