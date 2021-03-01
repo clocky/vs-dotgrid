@@ -11,7 +11,7 @@
   "author": "mark@mclaughlin.me.uk",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.110.0"
+    "three": "^0.125.0"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
