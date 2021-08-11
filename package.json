@@ -2,9 +2,11 @@
   "name": "dotgrid",
   "version": "1.0.0",
   "description": "VSDot",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clocky/vs-dotgrid"
+  },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
@@ -14,9 +16,7 @@
     "three": "^0.125.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.5"
-  },
-  "resolutions": {
-    "node-forge": ">=0.10.0"
+    "parcel": "^2.0.0-rc.0",
+    "postcss": "^8.3.6"
   }
 }
