@@ -2,7 +2,6 @@
   "name": "dotgrid",
   "version": "1.0.0",
   "description": "VSDot",
-  "main": "index.js",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
     "start": "parcel index.html",
@@ -14,7 +13,7 @@
     "three": "^0.125.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.5"
+    "parcel": "^2.0.0-rc.0"
   },
   "resolutions": {
     "node-forge": ">=0.10.0"
