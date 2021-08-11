@@ -14,7 +14,7 @@
     "three": "^0.125.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.5"
   },
   "resolutions": {
     "node-forge": ">=0.10.0"
