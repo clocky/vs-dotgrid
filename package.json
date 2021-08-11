@@ -2,6 +2,10 @@
   "name": "dotgrid",
   "version": "1.0.0",
   "description": "VSDot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clocky/vs-dotgrid"
+  },
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
@@ -12,6 +16,7 @@
     "three": "^0.125.0"
   },
   "devDependencies": {
-    "parcel": "^2.0.0-rc.0"
+    "parcel": "^2.0.0-rc.0",
+    "postcss": "^8.3.6"
   }
 }
