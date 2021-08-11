@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "VSDot",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
@@ -14,8 +13,5 @@
   },
   "devDependencies": {
     "parcel": "^2.0.0-rc.0"
-  },
-  "resolutions": {
-    "node-forge": ">=0.10.0"
   }
 }
