@@ -9,16 +9,18 @@
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
     "start": "parcel index.html",
+    "prebuild": "rimraf dist",
     "build": "parcel build index.html"
   },
   "author": "mark@mclaughlin.me.uk",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.125.0"
+    "three": "^0.135.0"
   },
   "devDependencies": {
-    "parcel": "^2.0.0-rc.0",
-    "postcss": "^8.3.6"
+    "parcel": "^2.0.1",
+    "postcss": "^8.3.6",
+    "rimraf": "^3.0.2"
   },
   "resolutions": {
     "set-value": "^4.0.1"
