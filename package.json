@@ -14,7 +14,7 @@
   "author": "mark@mclaughlin.me.uk",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.135.0"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "parcel": "^2.0.1",
