@@ -7,7 +7,6 @@
     "url": "https://github.com/clocky/vs-dotgrid"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "parcel index.html",
     "prebuild": "rimraf dist",
     "build": "parcel build index.html"
@@ -21,8 +20,5 @@
     "parcel": "^2.0.1",
     "postcss": "^8.3.6",
     "rimraf": "^3.0.2"
-  },
-  "resolutions": {
-    "set-value": "^4.0.1"
   }
 }
