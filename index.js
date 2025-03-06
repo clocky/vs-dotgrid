@@ -12,8 +12,8 @@ const SEPARATION = 32,
   AMOUNTX = 64,
   AMOUNTY = 128;
 
-var camera, scene, renderer;
-var particles,
+let camera, scene, renderer;
+let particles,
   count = 0;
 
 init();
