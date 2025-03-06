@@ -14,11 +14,11 @@
   "author": "mark@mclaughlin.me.uk",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.137.0"
+    "three": "^0.155.0"
   },
   "devDependencies": {
-    "parcel": "^2.0.1",
+    "parcel": "^2.10.3",
     "postcss": "^8.4.31",
-    "rimraf": "^3.0.2"
+    "rimraf": "^4.0.0"
   }
 }
