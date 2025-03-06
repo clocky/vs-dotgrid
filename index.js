@@ -93,10 +93,10 @@ function render() {
     for (var iy = 0; iy < AMOUNTY; iy++) {
       const sinValue = Math.sin((ix + count) * 0.1) * 512;
       const cosValue = Math.cos((iy + count) * 0.1) * 128;
-      const sinScale = (Math.sin((ix + count) * 0.25) + 1) * 8;
-      const cosScale = (Math.cos((iy + count) * 0.25) + 1) * 8;
-      scales[j] = sinScale + cosScale;
-      (Math.cos((iy + count) * 0.25) + 1) * 8;
+      positions[i + 1] = sinValue + cosValue;
+      scales[j] =
+        (Math.sin((ix + count) * 0.25) + 1) * 8 +
+        (Math.cos((iy + count) * 0.25) + 1) * 8;
       i += 3;
       j++;
     }
