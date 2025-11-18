@@ -41,9 +41,12 @@ function init() {
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
 
+  const computedStyle = getComputedStyle(document.documentElement);
+  const dotColor = new THREE.Color(computedStyle.getPropertyValue('--dot-color').trim());
+
   const material = new THREE.ShaderMaterial({
     uniforms: {
-      color: { value: new THREE.Color(0x5c2d91) },
+      color: { value: dotColor },
     },
     vertexShader: vertexShader,
     fragmentShader: fragmentShader
