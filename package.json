@@ -1,15 +1,16 @@
 {
   "name": "dotgrid",
   "version": "1.0.0",
+  "type": "module",
   "description": "VSDot",
   "repository": {
     "type": "git",
     "url": "https://github.com/clocky/vs-dotgrid"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "prebuild": "rimraf dist",
-    "build": "parcel build index.html"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "author": "mark@mclaughlin.me.uk",
   "license": "ISC",
@@ -17,8 +18,10 @@
     "three": "^0.174.0"
   },
   "devDependencies": {
-    "parcel": "^2.13.3",
+    "@types/three": "^0.181.0",
     "postcss": "^8.5.3",
-    "rimraf": "^6.0.1"
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1",
+    "vite-plugin-compression": "^0.5.1"
   }
 }
