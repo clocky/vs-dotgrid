@@ -48,8 +48,8 @@ function init() {
     uniforms: {
       color: { value: dotColor },
     },
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader
+    vertexShader,
+    fragmentShader
   });
 
   particles = new THREE.Points(geometry, material);
