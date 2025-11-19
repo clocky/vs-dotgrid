@@ -121,5 +121,5 @@ function render() {
   particles.geometry.attributes.scale.needsUpdate = true;
 
   renderer.render(scene, camera);
-  count += 0.05;
+  count += 0.01;
 }
