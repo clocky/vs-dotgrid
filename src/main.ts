@@ -3,7 +3,9 @@ import './style.css';
 import vertexShader from './shaders/vertex.glsl?raw';
 import fragmentShader from './shaders/fragment.glsl?raw';
 
-const SEPARATION = 32, AMOUNTX = 64, AMOUNTY = 128;
+const SEPARATION = 32;
+const AMOUNTX = 64;
+const AMOUNTY = 128;
 
 let camera: THREE.PerspectiveCamera;
 let scene: THREE.Scene;
@@ -14,6 +16,11 @@ let count = 0;
 init();
 animate();
 
+/**
+ * Initializes the Three.js scene, camera, renderer, and particle system.
+ * Sets up the dot grid geometry with position and scale attributes,
+ * applies custom shaders, and attaches event listeners.
+ */
 function init() {
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.z = AMOUNTY * 16;
@@ -63,17 +70,30 @@ function init() {
   window.addEventListener('resize', onWindowResize, false);
 }
 
+/**
+ * Handles window resize events by updating the camera aspect ratio
+ * and renderer size to match the new window dimensions.
+ */
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
+/**
+ * Main animation loop that requests the next frame and calls render.
+ * Uses requestAnimationFrame for smooth 60fps animation.
+ */
 function animate() {
   requestAnimationFrame(animate);
   render();
 }
 
+/**
+ * Renders a single frame of the animation.
+ * Updates camera position and rotation, calculates wave motion for particles,
+ * and updates particle positions and scales based on sine/cosine functions.
+ */
 function render() {
   camera.position.x += (camera.position.x) * .05;
   camera.position.y += (camera.position.y) * .05;
