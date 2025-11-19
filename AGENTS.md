@@ -32,3 +32,4 @@ The application uses a single Three.js scene.
 - **Start Dev Server**: `npm start` (runs `vite`)
 - **Build for Production**: `npm run build` (runs `vite build`)
 - **Preview Production Build**: `npm run preview` (runs `vite preview`)
+- **Deploy to GitHub Pages**: `npm run deploy` (runs `npm run build` and `gh-pages -d dist`)

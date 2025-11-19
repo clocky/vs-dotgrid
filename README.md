@@ -53,6 +53,16 @@ To preview the production build locally:
 npm run preview
 ```
 
+### Deployment
+
+To deploy to GitHub Pages:
+
+```bash
+npm run deploy
+```
+
+This will build the project and push the `dist` folder to the `gh-pages` branch. The site will be available at `https://clocky.github.io/vs-dotgrid/`.
+
 ## License
 
 ISC
