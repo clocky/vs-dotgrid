@@ -23,7 +23,7 @@
     "gh-pages": "^6.3.0",
     "postcss": "^8.5.6",
     "typescript": "^5.9.3",
-    "vite": "^6.4.1",
+    "vite": "^6.4.2",
     "vite-plugin-compression": "^0.5.1"
   }
 }
