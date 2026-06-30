@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Points, BufferGeometry, BufferAttribute, Color, ShaderMaterial } from 'three';
 import './style.css';
 import vertexShader from './shaders/vertex.glsl?raw';
 import fragmentShader from './shaders/fragment.glsl?raw';
@@ -7,10 +7,10 @@ const SEPARATION = 32;
 const AMOUNTX = 64;
 const AMOUNTY = 128;
 
-let camera: THREE.PerspectiveCamera;
-let scene: THREE.Scene;
-let renderer: THREE.WebGLRenderer;
-let particles: THREE.Points;
+let camera: PerspectiveCamera;
+let scene: Scene;
+let renderer: WebGLRenderer;
+let particles: Points;
 let count = 0;
 
 init();
@@ -18,18 +18,18 @@ animate();
 
 /**
  * Initializes the Three.js scene, camera, renderer, and particle system.
- * Sets up the dot grid geometry with position and scale attributes,
+ * Sets up the dot grid geometry with position and gridPos attributes,
  * applies custom shaders, and attaches event listeners.
  */
 function init() {
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+  camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.z = AMOUNTY * 16;
 
-  scene = new THREE.Scene();
+  scene = new Scene();
 
   const numParticles = AMOUNTX * AMOUNTY;
   const positions = new Float32Array(numParticles * 3);
-  const scales = new Float32Array(numParticles);
+  const gridPos = new Float32Array(numParticles * 2);
 
   let i = 0, j = 0;
 
@@ -38,32 +38,36 @@ function init() {
       positions[i] = ix * SEPARATION - ((AMOUNTX * SEPARATION) / 2); // x
       positions[i + 1] = 0; // y
       positions[i + 2] = iy * SEPARATION - ((AMOUNTY * SEPARATION) / 2); // z
-      scales[j] = 1;
+      
+      gridPos[j] = ix;
+      gridPos[j + 1] = iy;
+      
       i += 3;
-      j++;
+      j += 2;
     }
   }
 
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setAttribute('gridPos', new BufferAttribute(gridPos, 2));
 
   const computedStyle = getComputedStyle(document.documentElement);
-  const dotColor = new THREE.Color(computedStyle.getPropertyValue('--dot-color').trim());
+  const dotColor = new Color(computedStyle.getPropertyValue('--dot-color').trim());
 
-  const material = new THREE.ShaderMaterial({
+  const material = new ShaderMaterial({
     uniforms: {
       color: { value: dotColor },
+      uTime: { value: 0 }
     },
     vertexShader,
     fragmentShader
   });
 
-  particles = new THREE.Points(geometry, material);
+  particles = new Points(geometry, material);
   scene.add(particles);
 
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer = new WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
@@ -91,8 +95,7 @@ function animate() {
 
 /**
  * Renders a single frame of the animation.
- * Updates camera position and rotation, calculates wave motion for particles,
- * and updates particle positions and scales based on sine/cosine functions.
+ * Updates camera position and rotation, and passes the updated time uniform to the shader.
  */
 function render() {
   camera.position.x += (camera.position.x) * .05;
@@ -101,24 +104,8 @@ function render() {
 
   camera.rotation.z = (count * 0.02);
 
-  const positions = particles.geometry.attributes.position.array as Float32Array;
-  const scales = particles.geometry.attributes.scale.array as Float32Array;
-
-  let i = 0, j = 0;
-  for (let ix = 0; ix < AMOUNTX; ix++) {
-    for (let iy = 0; iy < AMOUNTY; iy++) {
-      positions[i + 1] =
-        (Math.sin((ix + count) * 0.1) * 512) +
-        (Math.cos((iy + count) * 0.1) * 128);
-      scales[j] =
-        (Math.sin((ix + count) * 0.25) + 1) * 8 +
-        (Math.cos((iy + count) * 0.25) + 1) * 8;
-      i += 3;
-      j++;
-    }
-  }
-  particles.geometry.attributes.position.needsUpdate = true;
-  particles.geometry.attributes.scale.needsUpdate = true;
+  const material = particles.material as ShaderMaterial;
+  material.uniforms.uTime.value = count;
 
   renderer.render(scene, camera);
   count += 0.01;
